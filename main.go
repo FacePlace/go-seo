@@ -8,16 +8,17 @@ import (
 
 func main() {
 	c := colly.NewCollector(
-		colly.AllowedDomains("en.wikipedia.org"),
+		colly.AllowedDomains("theidelab.com"),
 	)
 
-	c.OnHTML(".mw-parser-output", func(e *colly.HTMLElement) {
-		links := e.ChildAttrs("a", "href")
-		for _, l := range links {
+	// c.OnHTML(".mw-parser-output", func(e *colly.HTMLElement) {
+	// 	links := e.ChildAttrs("a", "href")
+	// 	for _, l := range links {
 
-			fmt.Printf("%s\n", l)
-		}
-	})
+	// 		fmt.Printf("%s\n", l)
+	// 		c.Visit(l)
+	// 	}
+	// })
 
 	c.OnRequest(func(r *colly.Request) {
 		fmt.Printf("Visiting: %v\n", r.URL)
@@ -27,5 +28,5 @@ func main() {
 		fmt.Printf("Processed: %v\n", r.Request.URL)
 	})
 
-	c.Visit("https://en.wikipedia.org/wiki/Web_scraping")
+	c.Visit("https://theidelab.com/")
 }
