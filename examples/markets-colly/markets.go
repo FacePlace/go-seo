@@ -13,9 +13,9 @@ func main() {
 	c := colly.NewCollector()
 
 	c.OnHTML("ul.Carousel-Slider", func(e *colly.HTMLElement) {
-		for _, v := range e.ChildTexts("li") {
-			fmt.Println(v)
-		}
+		e.ForEach("li", func(i int, e *colly.HTMLElement) {
+			fmt.Println(e)
+		})
 	})
 
 	c.Visit("https://finance.yahoo.com/world-indices")
