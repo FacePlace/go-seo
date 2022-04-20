@@ -2,31 +2,23 @@ package main
 
 import (
 	"fmt"
+	"time"
 
-	"github.com/gocolly/colly/v2"
+	"github.com/geziyor/geziyor"
+	"github.com/geziyor/geziyor/client"
 )
 
 func main() {
-	c := colly.NewCollector(
-		colly.AllowedDomains("theidelab.com"),
-	)
+	start := time.Now()
 
-	// c.OnHTML(".mw-parser-output", func(e *colly.HTMLElement) {
-	// 	links := e.ChildAttrs("a", "href")
-	// 	for _, l := range links {
+	// os.WriteFile("out.csv", []byte{}, 600)
+	geziyor.NewGeziyor(&geziyor.Options{
+		StartURLs: []string{"https://finance.yahoo.com/world-indices"},
+		ParseFunc: func(g *geziyor.Geziyor, r *client.Response) {
 
-	// 		fmt.Printf("%s\n", l)
-	// 		c.Visit(l)
-	// 	}
-	// })
+		},
+		// Exporters: []export.Exporter{&export.CSV{}},
+	}).Start()
 
-	c.OnRequest(func(r *colly.Request) {
-		fmt.Printf("Visiting: %v\n", r.URL)
-	})
-
-	c.OnResponse(func(r *colly.Response) {
-		fmt.Printf("Processed: %v\n", r.Request.URL)
-	})
-
-	c.Visit("https://theidelab.com/")
+	fmt.Printf("Finished proccessing: %v", time.Since(start))
 }
