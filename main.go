@@ -8,11 +8,20 @@ import (
 func main() {
 	bench := time.Now()
 
-	url := "https://finance.yahoo.com/world-indices"
+	urls := []string{
+		"https://finance.yahoo.com/world-indices",
+		"https://www.cnn.com/",
+		"https://www.nytimes.com/",
+		"https://nypost.com/",
+		"https://www.washingtonpost.com/",
+	}
 
-	crawledPage := parseMeta(url)
+	for i, v := range urls {
+		crawledPage := parseMeta(v)
 
-	fmt.Println(crawledPage.format())
+		fmt.Println(crawledPage.format())
+		fmt.Printf("PROCCESSED %v/%v\n", i+1, len(urls))
+	}
 
 	fmt.Printf("Finished proccessing: %v", time.Since(bench))
 }
