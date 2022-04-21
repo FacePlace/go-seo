@@ -1,13 +1,17 @@
 package main
 
-import "github.com/gocolly/colly/v2"
+import (
+	"fmt"
+
+	"github.com/gocolly/colly/v2"
+)
 
 func parseMeta(url string) webPage {
 	c := colly.NewCollector()
 
 	metaTags := []meta{}
 	var title string
-
+	// TODO: Handle errors
 	c.OnHTML("head", func(e *colly.HTMLElement) {
 		title = e.ChildText("title")
 		e.ForEach("meta", func(i int, e *colly.HTMLElement) {
@@ -24,6 +28,11 @@ func parseMeta(url string) webPage {
 				})
 			}
 		})
+	})
+
+	c.OnError(func(r *colly.Response, err error) {
+		fmt.Printf("Failed requesting URL: %v with respone: %v\n", r.Request.URL, r)
+		fmt.Println("Error: ", err)
 	})
 
 	c.Visit(url)

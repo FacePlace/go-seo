@@ -16,7 +16,7 @@ var urls = []string{
 	"https://www.cbsnews.com/",
 	"https://www.cnbc.com/world/",
 	"https://www.npr.org/",
-	// "https://www.washingtonpost.com/",
+	"https://www.washingtonpost.com/",
 }
 
 func main() {
@@ -39,7 +39,7 @@ func main() {
 }
 
 func parseSEO(url string) {
-	crawledPage := parseMeta(url)
+	parseMeta(url)
 
-	fmt.Println(crawledPage.format())
+	// fmt.Println(crawledPage.format())
 }
