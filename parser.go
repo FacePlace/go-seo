@@ -11,7 +11,7 @@ func parseMeta(url string) webPage {
 
 	metaTags := []meta{}
 	var title string
-	// TODO: Handle errors
+
 	c.OnHTML("head", func(e *colly.HTMLElement) {
 		title = e.ChildText("title")
 		e.ForEach("meta", func(i int, e *colly.HTMLElement) {

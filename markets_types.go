@@ -3,26 +3,26 @@ package main
 import "fmt"
 
 type meta struct {
-	property string
-	content  string
+	Property string `json:"property"`
+	Content  string `json:"content"`
 }
 
 type webPage struct {
-	title    string
-	url      string
-	metaTags []meta
+	Title    string `json:"title"`
+	Url      string `json:"url"`
+	MetaTags []meta `json:"metaTags"`
 }
 
 func (w *webPage) format() string {
 	str := fmt.Sprintf("")
 
-	str += fmt.Sprintf("TITLE: %v\n", w.title)
+	str += fmt.Sprintf("TITLE: %v\n", w.Title)
 	str += fmt.Sprintln("---")
-	str += fmt.Sprintf("URL: %v\n", w.url)
+	str += fmt.Sprintf("URL: %v\n", w.Url)
 	str += fmt.Sprintln("---")
 
-	for _, v := range w.metaTags {
-		str += fmt.Sprintf("%v - %v\n", v.property, v.content)
+	for _, v := range w.MetaTags {
+		str += fmt.Sprintf("%v - %v\n", v.Property, v.Content)
 		str += fmt.Sprintln("---")
 	}
 
