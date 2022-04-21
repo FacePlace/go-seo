@@ -1,3 +1,2 @@
 *.exe
-out.json
-out.csv
+*.json

@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 	"sync"
 	"time"
 )
@@ -26,6 +27,11 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(len(urls))
 
+	f, err := os.OpenFile("seo.json", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+
+	err = f.Truncate(0)
+	_, err = f.Seek(0, 0)
+
 	seoData := []webPage{}
 
 	proccessed := 0
@@ -42,6 +48,14 @@ func main() {
 
 	wg.Wait()
 
+	data, err := json.MarshalIndent(seoData, "", "  ")
+
+	if err != nil {
+		panic(err)
+	}
+
+	f.WriteString(string(data))
+
 	// fmt.Println(seoData)
 	fmt.Printf("Finished proccessing: %v", time.Since(bench))
 }
@@ -49,12 +63,5 @@ func main() {
 func parseSEO(url string) webPage {
 	crawledPage := parseMeta(url)
 
-	data, err := json.MarshalIndent(crawledPage, "", "  ")
-
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(string(data))
 	return crawledPage
 }
