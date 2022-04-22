@@ -15,6 +15,9 @@ func GetSEO(urls []string) error {
 	wg.Add(len(urls))
 
 	f, err := os.OpenFile("seo.json", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+	if err != nil {
+		return err
+	}
 
 	err = f.Truncate(0)
 	if err != nil {
@@ -43,7 +46,6 @@ func GetSEO(urls []string) error {
 	wg.Wait()
 
 	data, err := json.MarshalIndent(seoData, "", "  ")
-
 	if err != nil {
 		panic(err)
 	}
