@@ -1,4 +1,4 @@
-package main
+package seo
 
 import (
 	"encoding/json"
@@ -8,20 +8,7 @@ import (
 	"time"
 )
 
-var urls = []string{
-	"https://finance.yahoo.com/world-indices",
-	"https://www.cnn.com/",
-	"https://www.nytimes.com/",
-	"https://nypost.com/",
-	"https://www.wsj.com/",
-	"https://www.reuters.com/",
-	"https://www.cbsnews.com/",
-	"https://www.cnbc.com/world/",
-	"https://www.npr.org/",
-	// "https://www.washingtonpost.com/",
-}
-
-func main() {
+func GetSEO(urls []string) error {
 	bench := time.Now()
 
 	var wg sync.WaitGroup
@@ -30,7 +17,14 @@ func main() {
 	f, err := os.OpenFile("seo.json", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
 
 	err = f.Truncate(0)
+	if err != nil {
+		return err
+	}
+
 	_, err = f.Seek(0, 0)
+	if err != nil {
+		return err
+	}
 
 	seoData := []webPage{}
 
@@ -58,6 +52,8 @@ func main() {
 
 	// fmt.Println(seoData)
 	fmt.Printf("Finished proccessing: %v", time.Since(bench))
+
+	return err
 }
 
 func parseSEO(url string) webPage {
