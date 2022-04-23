@@ -1,0 +1,64 @@
+{
+  "env": {
+      "browser": true,
+      "es6": true,
+      "es2017": true,
+      "es2020": true
+  },
+  "extends": [
+      "standard",
+      "standard-jsx",
+      "standard-react"
+  ],
+  "plugins": [
+      "react",
+      "react-hooks",
+      "@next/next"
+  ],
+  "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "ecmaFeatures": {
+          "jsx": true
+      }
+  },
+  "rules": {
+      "no-tabs": [0],
+      "no-new": [0],
+      "no-unused-vars": [0],
+      "no-useless-return" : [0],
+      "no-undef": [0],
+      "no-template-curly-in-string": [0],
+      "no-useless-constructor": [0],
+      "no-multiple-empty-lines": [2, {"max":2}],
+      "no-constant-condition": [0],
+      "no-lone-blocks": [0],
+      "import/no-unresolved": [0],
+      "prefer-const": [0],
+      "indent": [2, 2],
+      "semi": [2,"always"],
+      "brace-style": [2, "allman", {"allowSingleLine": true}],
+      "padded-blocks": [2, "never", {"allowSingleLineBlocks": true}],
+      "space-before-function-paren": [2, "never"],
+      "standard/object-curly-even-spacing": [0],
+      "object-curly-spacing": [2],
+      "object-property-newline": "error",
+      "object-curly-newline": "error",
+      "node/handle-callback-err": [0],
+      "eol-last": [0],
+      "comma-dangle" : [2, "always-multiline"],
+      "eqeqeq": [0],
+      "react/no-unknown-property": "warn",
+      "react-hooks/rules-of-hooks": "error",
+      "react/react-in-jsx-scope": 0,
+      "react/jsx-no-undef": [0],
+      "react/prop-types": [0],
+      "react/jsx-handler-names": [0],
+      "react-hooks/exhaustive-deps": "warn",
+      "react/jsx-no-target-blank": [2, { "enforceDynamicLinks": "always" }]
+  }
+}
