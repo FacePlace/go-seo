@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func GetSEO(urls []string) error {
+func GetSEO(urls []string) (string, error) {
 	bench := time.Now()
 
 	var wg sync.WaitGroup
@@ -16,17 +16,17 @@ func GetSEO(urls []string) error {
 
 	f, err := os.OpenFile("seo.json", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	err = f.Truncate(0)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	_, err = f.Seek(0, 0)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	seoData := []webPage{}
@@ -55,7 +55,7 @@ func GetSEO(urls []string) error {
 	// fmt.Println(seoData)
 	fmt.Printf("Finished proccessing: %v", time.Since(bench))
 
-	return err
+	return string(data), err
 }
 
 func parseSEO(url string) webPage {

@@ -3,6 +3,7 @@ package server
 import (
 	"net/http"
 
+	"github.com/FacePlace/go-seo/seo"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +14,11 @@ func setRouter() *gin.Engine {
 	{
 		api.GET("/hello", func(ctx *gin.Context) {
 			ctx.JSON(200, gin.H{"msg": "world"})
+		})
+		api.GET("/parse", func(ctx *gin.Context) {
+			urls := ctx.Query("q")
+			data, _ := seo.GetSEO([]string{urls})
+			ctx.String(200, data)
 		})
 	}
 
