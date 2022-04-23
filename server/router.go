@@ -17,6 +17,8 @@ func setRouter() *gin.Engine {
 		})
 		api.GET("/parse", func(ctx *gin.Context) {
 			urls := ctx.Query("q")
+			ctx.Header("Access-Control-Allow-Origin", "*")
+			ctx.Header("Access-Control-Allow-Methods", "GET")
 			data, _ := seo.GetSEO([]string{urls})
 			ctx.String(200, data)
 		})

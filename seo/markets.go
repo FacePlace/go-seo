@@ -3,7 +3,6 @@ package seo
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 	"sync"
 	"time"
 )
@@ -14,20 +13,20 @@ func GetSEO(urls []string) (string, error) {
 	var wg sync.WaitGroup
 	wg.Add(len(urls))
 
-	f, err := os.OpenFile("seo.json", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
-	if err != nil {
-		return "", err
-	}
+	// f, err := os.OpenFile("seo.json", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+	// if err != nil {
+	// 	return "", err
+	// }
 
-	err = f.Truncate(0)
-	if err != nil {
-		return "", err
-	}
+	// err = f.Truncate(0)
+	// if err != nil {
+	// 	return "", err
+	// }
 
-	_, err = f.Seek(0, 0)
-	if err != nil {
-		return "", err
-	}
+	// _, err = f.Seek(0, 0)
+	// if err != nil {
+	// 	return "", err
+	// }
 
 	seoData := []webPage{}
 
@@ -50,7 +49,7 @@ func GetSEO(urls []string) (string, error) {
 		panic(err)
 	}
 
-	f.WriteString(string(data))
+	// f.WriteString(string(data))
 
 	// fmt.Println(seoData)
 	fmt.Printf("Finished proccessing: %v", time.Since(bench))

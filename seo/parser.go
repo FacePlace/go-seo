@@ -14,7 +14,7 @@ func parseMeta(url string) webPage {
 
 	c.OnHTML("head", func(e *colly.HTMLElement) {
 		title = e.ChildText("title")
-		e.ForEach("meta", func(i int, e *colly.HTMLElement) {
+		e.ForEach("meta", func(_ int, e *colly.HTMLElement) {
 			property := e.Attr("property")
 			if len(property) == 0 {
 				property = e.Attr("name")
