@@ -3,7 +3,7 @@ package seo_test
 import (
 	"testing"
 
-	"github.com/FacePlace/go-seo"
+	"github.com/FacePlace/go-seo/seo"
 )
 
 func TestParseSEO(t *testing.T) {
