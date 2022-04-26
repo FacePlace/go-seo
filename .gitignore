@@ -1,3 +1,6 @@
+# production
 *.exe
-*.json
+seo.json
+
+# misc
 .DS_Store
